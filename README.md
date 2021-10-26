@@ -38,3 +38,6 @@
 ```
 
 
+## Calendar Component Layout
+![Calendar Component Layout](https://i.imgur.com/b02q48A.png)
+
