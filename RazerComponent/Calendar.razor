@@ -1,0 +1,60 @@
+﻿
+<div class="row">
+    <div class="col-md-6">
+        <div class="fc-header-title"><h2>@monthName, @year</h2></div>
+    </div>
+    <div class="col-md-6">
+        <span class="nav justify-content-end">
+            <span class="fc-button fc-button-prev fc-state-default fc-corner-left" unselectable="on"
+                  @onclick="() => { monthsAway--; CreateMonth(); }"><span class="fc-text-arrow">‹</span></span>
+
+            <span class="fc-button fc-button-next fc-state-default fc-corner-right" unselectable="on"
+                  @onclick="() => { monthsAway++; CreateMonth(); }"><span class="fc-text-arrow">›</span></span>
+
+            <span class="fc-button fc-button-today fc-state-default fc-corner-left fc-corner-right"
+                  @onclick="() => { monthsAway=0; CreateMonth(); }"
+                  unselectable="on">today</span>
+        </span>
+    </div>
+</div>
+<section>
+    @for (int i = 0; i < 7; i++)
+    {
+        <div class="fc-day-header fc-widget-header">
+            @((DayOfWeek)i)
+        </div>
+    }
+    @for (int i = 0; i < numDummyColumn; i++)
+    {
+        <div class="fc-day">
+            <div class="fc-day-number"></div>
+            <div class="fc-day-content">
+                <div style="position: relative; height: 28px;">&nbsp;</div>
+            </div>
+        </div>
+    }
+    @for (int i = 1; i <= monthEnd.Day; i++)
+    {
+        DateTime currentDay = new DateTime(this.year, this.month, i);
+        var calendarItems = CalendarItems.Where(n => n.Date == new DateTime(year, month, i));
+        <div class="fc-day">
+            <div class="fc-day-number">
+                @i
+                <button type="button" class="close text-primary" aria-label="Close"
+                        @onclick="@(()=>OnClick.InvokeAsync(new CalendarItem(0, currentDay, "Create new")))">
+                    <span aria-hidden="true">+</span>
+                </button>
+            </div>
+            <div class="fc-day-content">
+                @foreach (CalendarItem item in calendarItems)
+                {
+                    <div class="fc-event fc-event-hori fc-event-draggable fc-event-start fc-event-end">
+                        <div class="fc-event-inner" @onclick="@(()=>OnClick.InvokeAsync(item))">
+                            <span class="fc-event-title">@item.Name</span>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</section>

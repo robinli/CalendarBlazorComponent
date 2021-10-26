@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30711.63
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RazerComponent", "RazerComponent\RazerComponent.csproj", "{4CA35D39-7046-43D3-9C67-28A5E750D914}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestBlazorComponent", "TestBlazorComponent\TestBlazorComponent.csproj", "{E570D4B8-0190-4C98-8BC3-D4E5F6BDFA8D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4CA35D39-7046-43D3-9C67-28A5E750D914}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CA35D39-7046-43D3-9C67-28A5E750D914}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CA35D39-7046-43D3-9C67-28A5E750D914}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CA35D39-7046-43D3-9C67-28A5E750D914}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E570D4B8-0190-4C98-8BC3-D4E5F6BDFA8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E570D4B8-0190-4C98-8BC3-D4E5F6BDFA8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E570D4B8-0190-4C98-8BC3-D4E5F6BDFA8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E570D4B8-0190-4C98-8BC3-D4E5F6BDFA8D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3B96F6DD-9B15-4761-93C3-FD144A537084}
+	EndGlobalSection
+EndGlobal

@@ -1,18 +1,9 @@
-# Calendar Blazor Component
-## Development
-- Visual Studio 2019
-- Blazor Server Project
-- .NET 5
+﻿@page "/"
 
-## Reference
-
-- Creating a Calendar in Blazor - Full Tutorial! https://youtu.be/33klf8M5JAA
-- Bootstrap Calendar Design https://bootsnipp.com/snippets/M3jmA
-
-## Use Calendar Component
-```
+<h1>Hello, Calendar! @CalendarName</h1>
+<hr />
 <Calendar @ref="CalendarCtrl_1" CalendarItems="Items" OnClick="CalendarItem_Click"></Calendar>
-
+<hr />
 @code{ 
 
     private Calendar CalendarCtrl_1;
@@ -35,6 +26,3 @@
         CalendarName = item.Name;
     }
 }
-```
-
-
