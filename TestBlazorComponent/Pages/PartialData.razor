@@ -1,0 +1,42 @@
+﻿@page "/PartialData"
+
+<h1>Partial load data! @CalendarName</h1>
+<hr />
+<Calendar @ref="CalendarCtrl"
+          CalendarItems="MonthlyItems"
+          ItemClick="Cal_OnItemClick"
+          DateRangeChange="Cal_OnDateRangeChange"></Calendar>
+<hr />
+@code{
+
+    private Calendar CalendarCtrl;
+    private List<CalendarItem> ALL_Items;
+    private List<CalendarItem> MonthlyItems;
+    private string CalendarName;
+
+    protected override void OnInitialized()
+    {
+        MonthlyItems = new List<CalendarItem>();
+
+        ALL_Items = new List<CalendarItem>();
+        ALL_Items.Add(new CalendarItem(1, new DateTime(2021, 10, 5), "Test day 01"));
+        ALL_Items.Add(new CalendarItem(2, new DateTime(2021, 10, 5), "Test day 02"));
+        ALL_Items.Add(new CalendarItem(3, new DateTime(2021, 11, 1), "Test day 03"));
+        ALL_Items.Add(new CalendarItem(4, new DateTime(2021, 12, 25), "Merry Christmas"));
+        ALL_Items.Add(new CalendarItem(5, new DateTime(2022, 1, 1), "Happy New Years"));
+    }
+
+    private async Task Cal_OnItemClick(CalendarItem item)
+    {
+        await Task.Delay(0);
+        CalendarName = item.Name;
+    }
+
+    private void Cal_OnDateRangeChange(DateRange dateRange)
+    {
+        MonthlyItems = (from x in ALL_Items
+                        where x.Date >= dateRange.StartDate
+                        && x.Date <= dateRange.FinishDate
+                        select x).ToList();
+    }
+}

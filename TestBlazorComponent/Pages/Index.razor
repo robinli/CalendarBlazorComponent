@@ -1,12 +1,15 @@
 ﻿@page "/"
+@page "/Index"
 
 <h1>Hello, Calendar! @CalendarName</h1>
 <hr />
-<Calendar @ref="CalendarCtrl_1" CalendarItems="Items" OnClick="CalendarItem_Click"></Calendar>
+<Calendar @ref="CalendarCtrl"
+          CalendarItems="Items"
+          ItemClick="Cal_OnItemClick"></Calendar>
 <hr />
-@code{ 
+@code{
 
-    private Calendar CalendarCtrl_1;
+    private Calendar CalendarCtrl;
     private List<CalendarItem> Items;
     private string CalendarName;
 
@@ -20,7 +23,7 @@
         Items.Add(new CalendarItem(5, new DateTime(2022, 1, 1), "Happy New Years"));
     }
 
-    private async Task CalendarItem_Click(CalendarItem item)
+    private async Task Cal_OnItemClick(CalendarItem item)
     {
         await Task.Delay(0);
         CalendarName = item.Name;

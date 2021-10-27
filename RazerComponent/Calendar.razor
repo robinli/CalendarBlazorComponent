@@ -11,9 +11,8 @@
             <span class="fc-button fc-button-next fc-state-default fc-corner-right" unselectable="on"
                   @onclick="() => { monthsAway++; CreateMonth(); }"><span class="fc-text-arrow">›</span></span>
 
-            <span class="fc-button fc-button-today fc-state-default fc-corner-left fc-corner-right"
-                  @onclick="() => { monthsAway=0; CreateMonth(); }"
-                  unselectable="on">today</span>
+            <span class="fc-button fc-button-today fc-state-default fc-corner-left fc-corner-right" unselectable="on"
+                  @onclick="() => { monthsAway=0; CreateMonth(); }">today</span>
         </span>
     </div>
 </div>
@@ -41,7 +40,7 @@
             <div class="fc-day-number">
                 @i
                 <button type="button" class="close text-primary" aria-label="Close"
-                        @onclick="@(()=>OnClick.InvokeAsync(new CalendarItem(0, currentDay, "Create new")))">
+                        @onclick="@(()=>ItemClick.InvokeAsync(new CalendarItem(0, currentDay, "Create new")))">
                     <span aria-hidden="true">+</span>
                 </button>
             </div>
@@ -49,7 +48,7 @@
                 @foreach (CalendarItem item in calendarItems)
                 {
                     <div class="fc-event fc-event-hori fc-event-draggable fc-event-start fc-event-end">
-                        <div class="fc-event-inner" @onclick="@(()=>OnClick.InvokeAsync(item))">
+                        <div class="fc-event-inner" @onclick="@(()=>ItemClick.InvokeAsync(item))">
                             <span class="fc-event-title">@item.Name</span>
                         </div>
                     </div>

@@ -12,7 +12,9 @@ namespace RazerComponent
     public partial class Calendar : ComponentBase
     {
         [Parameter] public List<CalendarItem> CalendarItems { get; set; }
-        [Parameter] public EventCallback<CalendarItem> OnClick { get; set; }
+        [Parameter] public EventCallback<CalendarItem> ItemClick { get; set; }
+        [Parameter] public EventCallback<DateRange> DateRangeChange { get; set; }
+
 
         private string monthName = "";
         private DateTime monthEnd;
@@ -24,6 +26,7 @@ namespace RazerComponent
 
         protected override void OnInitialized()
         {
+            CalendarItems = CalendarItems ?? new List<CalendarItem>();
             CreateMonth();
         }
 
@@ -53,8 +56,12 @@ namespace RazerComponent
             };
 
             numDummyColumn = (int)monthStart.DayOfWeek;
-        }
 
-        
+            if (DateRangeChange.HasDelegate)
+            {
+                DateRangeChange.InvokeAsync(new DateRange(monthStart, monthEnd));
+            }
+
+        }
     }
 }

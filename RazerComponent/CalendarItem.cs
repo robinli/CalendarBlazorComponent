@@ -7,4 +7,6 @@ using System.Threading.Tasks;
 namespace RazerComponent
 {
     public record CalendarItem(int Id, DateTime Date, string Name);
+
+    public record DateRange(DateTime StartDate, DateTime FinishDate);
 }
