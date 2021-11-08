@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,8 @@ namespace RazerComponent
         [Parameter] public List<CalendarItem> CalendarItems { get; set; }
         [Parameter] public EventCallback<CalendarItem> ItemClick { get; set; }
         [Parameter] public EventCallback<DateRange> DateRangeChange { get; set; }
-
+        
+        [Inject] public IJSRuntime jsRunTime { get; set; }
 
         private string monthName = "";
         private DateTime monthEnd;
@@ -22,7 +24,6 @@ namespace RazerComponent
         private int numDummyColumn = 0;
         private int year = 0;
         private int month = 0;
-        
 
         protected override void OnInitialized()
         {
@@ -62,6 +63,20 @@ namespace RazerComponent
                 DateRangeChange.InvokeAsync(new DateRange(monthStart, monthEnd));
             }
 
+        }
+
+
+        public async Task Print()
+        {
+            await jsRunTime.InvokeVoidAsync("CalendarPrint");
+        }
+        public async Task Print_Before()
+        {
+            await jsRunTime.InvokeVoidAsync("CalendarPrint_Before");
+        }
+        public async Task Print_After()
+        {
+            await jsRunTime.InvokeVoidAsync("CalendarPrint_After");
         }
     }
 }

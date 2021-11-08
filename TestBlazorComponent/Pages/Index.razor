@@ -1,7 +1,10 @@
 ﻿@page "/"
 @page "/Index"
+@using TestBlazorComponent.Data;
+@inject TestBlazorComponent.Data.ISampleCalendarDataService sampleCalendarDataService;
+@inject IJSRuntime jsRunTime
 
-<h1>Hello, Calendar! @CalendarName</h1>
+<h1 class="hideWhenPrint">Hello, Calendar! @CalendarName</h1>
 <hr />
 <Calendar @ref="CalendarCtrl"
           CalendarItems="Items"
@@ -15,13 +18,8 @@
 
     protected override void OnInitialized()
     {
-        Items = new List<CalendarItem>();
-        Items.Add(new CalendarItem(1, new DateTime(2021, 10, 5), "Test day 01"));
-        Items.Add(new CalendarItem(2, new DateTime(2021, 10, 5), "Test day 02"));
-        Items.Add(new CalendarItem(3, new DateTime(2021, 11, 1), "Test day 03"));
-        Items.Add(new CalendarItem(4, new DateTime(2021, 12, 25), "Merry Christmas"));
-        Items.Add(new CalendarItem(5, new DateTime(2022, 1, 1), "Happy New Years"));
-    }
+        Items = sampleCalendarDataService.GetAll();
+        }
 
     private async Task Cal_OnItemClick(CalendarItem item)
     {

@@ -10,11 +10,17 @@
 - Bootstrap Calendar Design https://bootsnipp.com/snippets/M3jmA
 
 ## Use Calendar Component
+
+### install nuget package
+Package Manager Console https://www.nuget.org/packages/RazerComponent/
+```
+Install-Package RazerComponent -Version 1.0.0
+```
+
+### Blazer Page
 ```
 <Calendar @ref="CalendarCtrl_1" CalendarItems="Items" OnClick="CalendarItem_Click"></Calendar>
-
 @code{ 
-
     private Calendar CalendarCtrl_1;
     private List<CalendarItem> Items;
     private string CalendarName;

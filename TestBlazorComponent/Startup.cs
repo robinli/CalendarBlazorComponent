@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TestBlazorComponent.Data;
 
 namespace TestBlazorComponent
 {
@@ -27,6 +28,8 @@ namespace TestBlazorComponent
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
+
+            services.AddScoped<ISampleCalendarDataService, SampleCalendarDataService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
