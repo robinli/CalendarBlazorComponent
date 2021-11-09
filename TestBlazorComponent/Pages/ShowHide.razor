@@ -1,0 +1,43 @@
+﻿@page "/ShowHide"
+@using TestBlazorComponent.Data;
+@inject TestBlazorComponent.Data.ISampleCalendarDataService sampleCalendarDataService;
+@inject IJSRuntime jsRunTime
+
+<div class="row hideWhenPrint">
+    <div class="col-md-6"><h1>Show hide</h1></div>
+    <div class="col-md-6 float-right">
+        <button class="btn btn-outline-secondary" @onclick="Show">Show Calendar</button>
+        <button class="btn btn-outline-primary" @onclick="Hide">Hide Calendar</button>
+    </div>
+</div>
+<hr />
+<Calendar @ref="CalendarCtrl"
+          CalendarItems="Items"
+          IsShow="ShowCalendar"></Calendar>
+<hr />
+@code{
+
+    private Calendar CalendarCtrl;
+    private List<CalendarItem> Items;
+    private string CalendarName;
+    private bool ShowCalendar = true;
+
+    protected override void OnInitialized()
+    {
+        Items = sampleCalendarDataService.GetAll();
+    }
+
+    private async Task Show()
+    {
+        await Task.Delay(0);
+        ShowCalendar = true;
+    }
+
+    private async Task Hide()
+    {
+        await Task.Delay(0);
+        ShowCalendar = false;
+    }
+
+
+}

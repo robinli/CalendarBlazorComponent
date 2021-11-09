@@ -1,4 +1,5 @@
-﻿
+﻿@if (IsShow)
+{
 <div class="row">
     <div class="col-md-6">
         <div class="fc-header-title"><h2>@monthName, @year</h2></div>
@@ -12,7 +13,7 @@
                   @onclick="() => { monthsAway++; CreateMonth(); }"><span class="fc-text-arrow">›</span></span>
 
             <span class="fc-button fc-button-today fc-state-default fc-corner-left fc-corner-right" unselectable="on"
-                  @onclick="() => { monthsAway=0; CreateMonth(); }">today</span>
+                  @onclick="() => { monthsAway = 0; CreateMonth(); }">today</span>
         </span>
     </div>
 </div>
@@ -40,7 +41,7 @@
             <div class="fc-day-number">
                 @i
                 <button type="button" class="close text-primary" aria-label="Close"
-                        @onclick="@(()=>ItemClick.InvokeAsync(new CalendarItem(0, currentDay, "Create new")))">
+                        @onclick="@(() => ItemClick.InvokeAsync(new CalendarItem(0, currentDay, "Create new")))">
                     <span aria-hidden="true">+</span>
                 </button>
             </div>
@@ -48,7 +49,7 @@
                 @foreach (CalendarItem item in calendarItems)
                 {
                     <div class="fc-event fc-event-hori fc-event-draggable fc-event-start fc-event-end">
-                        <div class="fc-event-inner" @onclick="@(()=>ItemClick.InvokeAsync(item))">
+                        <div class="fc-event-inner" @onclick="@(() => ItemClick.InvokeAsync(item))">
                             <span class="fc-event-title">@item.Name</span>
                         </div>
                     </div>
@@ -57,3 +58,4 @@
         </div>
     }
 </section>
+}

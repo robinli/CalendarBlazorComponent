@@ -15,7 +15,8 @@ namespace RazerComponent
         [Parameter] public List<CalendarItem> CalendarItems { get; set; }
         [Parameter] public EventCallback<CalendarItem> ItemClick { get; set; }
         [Parameter] public EventCallback<DateRange> DateRangeChange { get; set; }
-        
+        [Parameter] public bool IsShow { get; set; } = true;
+
         [Inject] public IJSRuntime jsRunTime { get; set; }
 
         private string monthName = "";
