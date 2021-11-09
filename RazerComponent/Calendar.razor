@@ -2,7 +2,7 @@
 {
 <div class="row">
     <div class="col-md-6">
-        <div class="fc-header-title"><h2>@monthName, @year</h2></div>
+        <div class="fc-header-title"><h2>@monthEnd.ToString("Y")</h2></div>
     </div>
     <div class="col-md-6">
         <span class="nav justify-content-end">
@@ -13,15 +13,15 @@
                   @onclick="() => { monthsAway++; CreateMonth(); }"><span class="fc-text-arrow">›</span></span>
 
             <span class="fc-button fc-button-today fc-state-default fc-corner-left fc-corner-right" unselectable="on"
-                  @onclick="() => { monthsAway = 0; CreateMonth(); }">today</span>
-        </span>
+                  @onclick="() => { monthsAway = 0; CreateMonth(); }">@Localizer["Today"]</span>
+            </span>
     </div>
 </div>
 <section>
     @for (int i = 0; i < 7; i++)
     {
         <div class="fc-day-header fc-widget-header">
-            @((DayOfWeek)i)
+            @GetDayName(i)
         </div>
     }
     @for (int i = 0; i < numDummyColumn; i++)

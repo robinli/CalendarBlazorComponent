@@ -2,9 +2,9 @@
 @page "/Index"
 @using TestBlazorComponent.Data;
 @inject TestBlazorComponent.Data.ISampleCalendarDataService sampleCalendarDataService;
-@inject IJSRuntime jsRunTime
+@inject IStringLocalizer<App> Localizer
 
-<h1 class="hideWhenPrint">Hello, Calendar! @CalendarName</h1>
+<h1 class="hideWhenPrint">@Localizer["Hello"], Blazor Calendar! @CalendarName</h1>
 <hr />
 <Calendar @ref="CalendarCtrl"
           CalendarItems="Items"
@@ -19,7 +19,7 @@
     protected override void OnInitialized()
     {
         Items = sampleCalendarDataService.GetAll();
-        }
+    }
 
     private async Task Cal_OnItemClick(CalendarItem item)
     {
