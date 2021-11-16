@@ -13,6 +13,7 @@ namespace RazerComponent
     /// </summary>
     public partial class Calendar : ComponentBase
     {
+        [Parameter] public DateTime? Today { get; set; }
         [Parameter] public List<CalendarItem> CalendarItems { get; set; }
         [Parameter] public EventCallback<CalendarItem> ItemClick { get; set; }
         [Parameter] public EventCallback<DateRange> DateRangeChange { get; set; }
@@ -37,7 +38,8 @@ namespace RazerComponent
 
         private void CreateMonth()
         {
-            var tempDate = DateTime.Now.AddMonths(monthsAway);
+            Today = (Today.HasValue ? Today.Value : DateTime.Now);
+            var tempDate = Today.Value.AddMonths(monthsAway);
             month = tempDate.Month;
             year = tempDate.Year;
 

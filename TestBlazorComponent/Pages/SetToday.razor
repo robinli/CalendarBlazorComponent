@@ -1,4 +1,5 @@
-﻿@page "/SetToday"
+﻿@page "/"
+@page "/Index"
 @using TestBlazorComponent.Data;
 @inject TestBlazorComponent.Data.ISampleCalendarDataService sampleCalendarDataService;
 @inject IStringLocalizer<App> Localizer
@@ -7,11 +8,10 @@
 <hr />
 <Calendar @ref="CalendarCtrl"
           CalendarItems="Items"
-          ItemClick="Cal_OnItemClick"
-          Today="@today"></Calendar>
+          ItemClick="Cal_OnItemClick"></Calendar>
 <hr />
 @code{
-    private DateTime today = DateTime.Today.AddMonths(1);
+
     private Calendar CalendarCtrl;
     private List<CalendarItem> Items;
     private string CalendarName;
