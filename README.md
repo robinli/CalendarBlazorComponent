@@ -14,7 +14,7 @@
 ### install nuget package
 Package Manager Console https://www.nuget.org/packages/RazerComponent/
 ```
-Install-Package RazerComponent -Version 1.0.0
+Install-Package RazerComponent
 ```
 
 ### Blazer Page
