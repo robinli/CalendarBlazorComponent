@@ -12,6 +12,14 @@
     <Company />
     <PackageIconUrl />
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="MultiLevelMenu.razor.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="MultiLevelMenu.razor" />
+  </ItemGroup>
 	<ItemGroup>
 		<None Include="icon.png">
 		  <Pack>True</Pack>

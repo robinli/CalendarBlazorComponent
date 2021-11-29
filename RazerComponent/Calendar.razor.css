@@ -38,12 +38,16 @@ div.fc-day-header {
 
 .fc-event-inner {
 	font-family: 'Roboto', sans-serif;
-	background: #03a9f3 !important;
-	color: #FFF !important;
+	/*background: #03a9f3 !important;*/
+	color: #FFF;
 	font-size: 12px !important;
 	font-weight: 500 !important;
 	padding: 5px 0px !important;
 }
+	.fc-event-inner.bg-default {
+		background-color: #03a9f3 !important;
+		color: #FFF !important;
+	}
 
 .fc {
 	direction: ltr;

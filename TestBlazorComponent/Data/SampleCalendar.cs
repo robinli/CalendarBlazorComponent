@@ -30,7 +30,15 @@ namespace TestBlazorComponent.Data
                         {
                             Id++;
                             DateTime t1 = new DateTime(DateTime.Today.Year + year, month, rnd.Next(1, 12));
-                            listData.Add(new CalendarItem(Id, t1, $"Test day {Id.ToString("000")}"));
+                            if(t1.DayOfWeek == DayOfWeek.Sunday)
+                            {
+                                listData.Add(new CalendarItem(Id, t1, $"Test day {Id.ToString("000")}", "bg-danger"));
+                            }
+                            else
+                            {
+                                listData.Add(new CalendarItem(Id, t1, $"Test day {Id.ToString("000")}"));
+                            }
+                            
                         }
                     }
                 }

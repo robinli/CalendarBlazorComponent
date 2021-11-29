@@ -1,0 +1,40 @@
+﻿<div class="@MultiLevelMenuCssClass" @onclick="ToggleMultiLevelMenu">
+    <ul class="nav flex-column">
+        @foreach (MenuItem item in MenuItems)
+        {
+            if (item.Children == null)
+            {
+                <li class="nav-item px-3">
+                    <NavLink class="nav-link" href="@item.Path">
+                        <span class="oi @item.Icon" aria-hidden="true"></span> @item.Name
+                    </NavLink>
+                </li>
+            }
+            if (item.Children != null)
+            {
+                <li class="nav-item pl-0 pt-0 pb-0">
+                    <a class="nav-link" style="cursor:pointer;"
+                       @onclick="() => ToggleSubMenu(item)"
+                       @onclick:stopPropagation="true">
+                        <span class="oi @item.Icon" aria-hidden="true"></span>
+                        <span class="pr-5">@item.Name</span>
+                        <span class="pl-4 oi @GetCssName(item)" aria-hidden="true"></span>
+                    </a>
+                    @if (item.IsExpandSubMenu)
+                    {
+                        foreach (MenuItem subItem in item.Children)
+                        {
+                            <ul class="nav flex-column">
+                                <li class="nav-item pl-3 pt-0 pb-0">
+                                    <NavLink class="nav-link" href="@subItem.Path" Match="NavLinkMatch.All">
+                                        <span class="oi @subItem.Icon" aria-hidden="true"></span> @subItem.Name
+                                    </NavLink>
+                                </li>
+                            </ul>
+                        }
+                    }
+                </li>
+            }
+        }
+    </ul>
+</div>
