@@ -30,8 +30,9 @@ PM> Install-Package RazerComponent
         Items.Add(new CalendarItem(1, new DateTime(2021, 10, 5), "Test day 01"));
         Items.Add(new CalendarItem(2, new DateTime(2021, 10, 5), "Test day 02"));
         Items.Add(new CalendarItem(3, new DateTime(2021, 11, 1), "Test day 03"));
-        Items.Add(new CalendarItem(4, new DateTime(2021, 12, 25), "Merry Christmas"));
-        Items.Add(new CalendarItem(5, new DateTime(2022, 1, 1), "Happy New Year"));
+		//Set background color
+        Items.Add(new CalendarItem(4, new DateTime(2021, 12, 25), "Merry Christmas", "bg-sucess"));
+        Items.Add(new CalendarItem(5, new DateTime(2022, 1, 1), "Happy New Year", "bg-color"));
     }
 
     private async Task CalendarItem_Click(CalendarItem item)
@@ -45,7 +46,7 @@ PM> Install-Package RazerComponent
 
 ## Calendar Component Layout
 
-![Calendar Component Layout](https://i.imgur.com/b02q48A.png)
+![Calendar Component Layout](https://i.imgur.com/ue4Yg03.png)
 
 
 ## Reference
