@@ -1,0 +1,54 @@
+﻿@if (IsShow)
+{
+<div class="row">
+    <div class="col-md-6">
+        <h2>@WeekFrom.ToString("Y")</h2>
+    </div>
+    <div class="col-md-6">
+        <span class="nav justify-content-end">
+            <button class="btn btn-outline-primary fc-button" unselectable="on"
+                  @onclick="() => OnPreviousClick()"><span class="fc-text-arrow">‹</span></button>
+
+            <button class="btn btn-outline-primary fc-button" unselectable="on"
+                  @onclick="() => OnNextClick()"><span class="fc-text-arrow">›</span></button>
+
+            <button class="btn btn-outline-primary fc-button ml-1" unselectable="on"
+                  @onclick="() => OnTodayClick()">@Localizer["Today"]</button>
+            </span>
+    </div>
+</div>
+
+<div class="weekview_container">
+    <div class="days">
+    @{
+        DateTime weekday = WeekFrom;
+        while (((int)WeekEnd.Subtract(weekday).TotalDays) >= 0)
+        {
+            <div class="day">@GetDayName(weekday) @weekday.Day</div>
+            weekday = weekday.AddDays(1);
+        }
+    }
+    </div>
+    <div class="weekview_content">
+        <div class="col" style="grid-column:1"></div>
+        <div class="col" style="grid-column:2"></div>
+        <div class="col" style="grid-column:3"></div>
+        <div class="col" style="grid-column:4"></div>
+        <div class="col" style="grid-column:5"></div>
+        <div class="col" style="grid-column:6"></div>
+        <div class="col" style="grid-column:7"></div>
+        @foreach (var item in CalendarItems.Where(m => m.Date >= WeekFrom && m.Date <= WeekEnd))
+        {
+            <div class="event" style="@GetStyleSheet(item)">
+                <button class="btn btn-sm @GetBgColor(item)"  
+                @onclick="@(() => ItemClick.InvokeAsync(item))">@item.Name</button>
+            </div>
+        }
+    </div>
+</div>
+}
+
+@*@foreach (var item in CalendarItems.Where(m => m.Date >= WeekFrom && m.Date <= WeekEnd))
+{
+    <button class="btn btn-outline-primary" @onclick="@(() => ItemClick.InvokeAsync(item))">@item.Date @item.Name</button>
+}*@

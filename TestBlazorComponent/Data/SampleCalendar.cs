@@ -30,7 +30,7 @@ namespace TestBlazorComponent.Data
                         {
                             Id++;
 
-                            DateTime t1 = new DateTime(DateTime.Today.Year + year, month, rnd.Next(1, 12));
+                            DateTime t1 = new DateTime(DateTime.Today.Year + year, month, rnd.Next(1, 28));
 
                             CalendarItem calItem = new CalendarItem(Id, t1, $"Test day {Id.ToString("000")}");
                             switch (t1.DayOfWeek)

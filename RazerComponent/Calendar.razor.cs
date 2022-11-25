@@ -33,52 +33,34 @@ namespace RazerComponent
         protected override void OnInitialized()
         {
             CalendarItems = CalendarItems ?? new List<CalendarItem>();
-            CreateMonth();
+            CreateMonth(false);
         }
 
-        private void CreateMonth()
+        private void CreateMonth(bool notifyEvent = true)
         {
-            Today = (Today.HasValue ? Today.Value : DateTime.Now);
+            Today = (Today.HasValue ? Today.Value : DateTime.Today);
             var tempDate = Today.Value.AddMonths(monthsAway);
             month = tempDate.Month;
             year = tempDate.Year;
 
             DateTime monthStart = new DateTime(year, month, 1);
             monthEnd = monthStart.AddMonths(1).AddDays(-1);
-            //monthName = monthStart.Month switch
-            //{
-            //    1 => "January",
-            //    2 => "February",
-            //    3 => "March",
-            //    4 => "April",
-            //    5 => "May",
-            //    6 => "June",
-            //    7 => "July",
-            //    8 => "August",
-            //    9 => "September",
-            //    10 => "October",
-            //    11 => "November",
-            //    12 => "December",
-            //    _ => ""
-            //};
-
             numDummyColumn = (int)monthStart.DayOfWeek;
 
-            if (DateRangeChange.HasDelegate)
+            if (notifyEvent && DateRangeChange.HasDelegate)
             {
                 DateRangeChange.InvokeAsync(new DateRange(monthStart, monthEnd));
             }
-
         }
 
         private string selectedCulture = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
-        public string GetDayName(int day)
+        private string GetDayName(int day)
         {
             var culture = new System.Globalization.CultureInfo(selectedCulture);
             return culture.DateTimeFormat.GetDayName((DayOfWeek)day);
         }
 
-
+        #region Print Page
         public async Task Print()
         {
             await jsRunTime.InvokeVoidAsync("CalendarPrint");
@@ -91,5 +73,6 @@ namespace RazerComponent
         {
             await jsRunTime.InvokeVoidAsync("CalendarPrint_After");
         }
+        #endregion
     }
 }
