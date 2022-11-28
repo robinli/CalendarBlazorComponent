@@ -1,8 +1,8 @@
 # Calendar Blazor Component
 ## Development
-- Visual Studio 2019
+- Visual Studio 2022
 - Blazor Server Project
-- .NET 5
+- .NET 6
 
 ## Use Calendar Component
 
