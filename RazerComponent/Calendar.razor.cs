@@ -4,6 +4,7 @@ using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace RazerComponent
@@ -13,51 +14,55 @@ namespace RazerComponent
     /// </summary>
     public partial class Calendar : ComponentBase
     {
+        [Inject] public IJSRuntime jsRunTime { get; set; }
+        [Inject] public IStringLocalizer<Calendar> Localizer { get; set; }
+        [Parameter] public CalendarKind ViewKind { get; set; } = CalendarKind.Month;
         [Parameter] public DateTime? Today { get; set; }
         [Parameter] public List<CalendarItem> CalendarItems { get; set; }
         [Parameter] public EventCallback<CalendarItem> ItemClick { get; set; }
         [Parameter] public EventCallback<DateRange> DateRangeChange { get; set; }
         [Parameter] public bool IsShow { get; set; } = true;
+        [Parameter] public bool CanEditData { get; set; } = true;
 
-        [Inject] public IJSRuntime jsRunTime { get; set; }
-        [Inject] public IStringLocalizer<Calendar> Localizer { get; set; }
+        private MonthView MonthViewl { get; set; }
+        private WeekView WeekViewl { get; set; }
+        private string CalendarTitle { get; set; }
 
-
-        //private string monthName = "";
-        private DateTime monthEnd;
-        private int monthsAway = 0;
-        private int numDummyColumn = 0;
-        private int year = 0;
-        private int month = 0;
-
+        private CalendarViewBase CurrentViewInstance;
         protected override void OnInitialized()
         {
-            CalendarItems = CalendarItems ?? new List<CalendarItem>();
-            CreateMonth(false);
         }
 
-        private void CreateMonth(bool notifyEvent = true)
+        protected override void OnAfterRender(bool firstRender)
         {
-            Today = (Today.HasValue ? Today.Value : DateTime.Today);
-            var tempDate = Today.Value.AddMonths(monthsAway);
-            month = tempDate.Month;
-            year = tempDate.Year;
-
-            DateTime monthStart = new DateTime(year, month, 1);
-            monthEnd = monthStart.AddMonths(1).AddDays(-1);
-            numDummyColumn = (int)monthStart.DayOfWeek;
-
-            if (notifyEvent && DateRangeChange.HasDelegate)
+            if (ViewKind == CalendarKind.Month)
             {
-                DateRangeChange.InvokeAsync(new DateRange(monthStart, monthEnd));
+                CurrentViewInstance = MonthViewl;
             }
+            if (ViewKind == CalendarKind.Week)
+            {
+                CurrentViewInstance = WeekViewl;
+            }
+            CalendarTitle = CurrentViewInstance.GetTitle();
+            StateHasChanged();
         }
 
-        private string selectedCulture = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
-        private string GetDayName(int day)
+        private void PreviousClick() { CurrentViewInstance.PreviousClick(); }
+        private void NextClick() { CurrentViewInstance.NextClick(); }
+        private void TodayClick() { CurrentViewInstance.TodayClick(); }
+        private async Task OnViewKindChange(ChangeEventArgs e)
         {
-            var culture = new System.Globalization.CultureInfo(selectedCulture);
-            return culture.DateTimeFormat.GetDayName((DayOfWeek)day);
+            await Task.Delay(0);
+            var val = e.Value.ToString();
+            ViewKind = (CalendarKind)Enum.Parse(typeof(CalendarKind), val, true);
+        }
+
+        private async Task OnItemClick(CalendarItem data)
+        {
+            if (CanEditData)
+            {
+                await ItemClick.InvokeAsync(data);
+            }
         }
 
         #region Print Page

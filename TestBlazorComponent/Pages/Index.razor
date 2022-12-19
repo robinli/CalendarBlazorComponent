@@ -1,21 +1,21 @@
-﻿@page "/SetToday"
+﻿@page "/"
+@page "/Index"
 @using TestBlazorComponent.Data;
 @inject TestBlazorComponent.Data.ISampleCalendarDataService sampleCalendarDataService;
 @inject IStringLocalizer<App> Localizer
 
 <h1 class="hideWhenPrint">@Localizer["Hello"], Blazor Calendar! @CalendarName</h1>
 <hr />
+<div class="">
 <Calendar @ref="CalendarCtrl"
-          CalendarItems="Items"
-          ItemClick="Cal_OnItemClick"
-          Today="@today"></Calendar>
-<hr />
-
+    CalendarItems="Items"
+    ItemClick="Cal_OnItemClick"></Calendar>
+</div>
 @code{
-    private DateTime today = DateTime.Today.AddMonths(1);
+
     private Calendar CalendarCtrl;
     private List<CalendarItem> Items;
-    private string CalendarName;
+    private string CalendarName { get; set; }
 
     protected override void OnInitialized()
     {

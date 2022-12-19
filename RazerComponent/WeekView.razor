@@ -1,6 +1,7 @@
-﻿@if (IsShow)
+﻿@inherits CalendarViewBase
+@if (IsShow)
 {
-<div class="row">
+@*<div class="row">
     <div class="col-md-6">
         <h2>@WeekFrom.ToString("Y")</h2>
     </div>
@@ -16,8 +17,7 @@
                   @onclick="() => OnTodayClick()">@Localizer["Today"]</button>
             </span>
     </div>
-</div>
-
+</div>*@
 <div class="weekview_container">
     <div class="days">
     @{

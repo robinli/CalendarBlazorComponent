@@ -22,6 +22,10 @@ namespace TestBlazorComponent.Data
                 Random rnd = new Random();
                 listData = new List<CalendarItem>();
                 int Id = 0;
+
+                CalendarItem todayItem = new CalendarItem(Id, DateTime.Today, $"Test Today", "bg-primary");
+                listData.Add(todayItem);
+
                 for (int year = -1; year <= 1; year++)
                 {
                     for (int month = 1; month <= 12; month++)

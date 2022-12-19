@@ -4,26 +4,39 @@
 @inject IJSRuntime jsRunTime
 
 <div class="row hideWhenPrint">
-    <div class="col-md-6"><h1>Show and Hide</h1></div>
+    <div class="col-md-6"><h1>Show and Hide @CalendarName</h1></div>
     <div class="col-md-6 float-right">
-        <button class="btn btn-outline-secondary" @onclick="Show">Show Calendar</button>
-        <button class="btn btn-outline-primary" @onclick="Hide">Hide Calendar</button>
+        <button class="btn btn-outline-primary" @onclick="Show">Show Calendar</button>
+        <button class="btn btn-outline-secondary" @onclick="Hide">Hide Calendar</button>
+
+        <button class="btn btn-primary" @onclick="EnableEdit">Enable Edit</button>
+        <button class="btn btn-secondary" @onclick="DisableEdit">Disable Edit</button>
     </div>
 </div>
 <hr />
 <Calendar @ref="CalendarCtrl"
-          CalendarItems="Items"
-          IsShow="ShowCalendar"></Calendar>
+    CalendarItems="Items"
+    ItemClick="Cal_OnItemClick"
+    IsShow="ShowCalendar"
+    CanEditData="CanEditData"></Calendar>
 <hr />
 @code{
 
     private Calendar CalendarCtrl;
     private List<CalendarItem> Items;
-    private bool ShowCalendar = true;
+    private string CalendarName { get; set; }
+    private bool ShowCalendar { get; set; } = true;
+    private bool CanEditData { get; set; } = true;
 
     protected override void OnInitialized()
     {
         Items = sampleCalendarDataService.GetAll();
+    }
+    
+    private async Task Cal_OnItemClick(CalendarItem item)
+    {
+        await Task.Delay(0);
+        CalendarName = item.Name;
     }
 
     private async Task Show()
@@ -38,5 +51,15 @@
         ShowCalendar = false;
     }
 
+    private async Task DisableEdit()
+    {
+        await Task.Delay(0);
+        CanEditData = false;
+    }
 
+    private async Task EnableEdit()
+    {
+        await Task.Delay(0);
+        CanEditData = true;
+    }
 }

@@ -731,6 +731,12 @@ table.fc-header {
 	margin-left: 4px;
 }
 
+.fc-button-select {
+	border-color: #9675ce;
+	color: #9675ce;
+	margin-left: 4px;
+}
+
 .fc-view-agendaDay thead tr.fc-first .fc-widget-header {
 	text-align: right;
 	padding-right: 10px;
