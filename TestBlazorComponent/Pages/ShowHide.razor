@@ -15,13 +15,14 @@
 </div>
 <hr />
 <Calendar @ref="CalendarCtrl"
+          @bind-Today="@Today"
     CalendarItems="Items"
     ItemClick="Cal_OnItemClick"
     IsShow="ShowCalendar"
     CanEditData="CanEditData"></Calendar>
 <hr />
 @code{
-
+    private DateTime? Today { get; set; } = DateTime.Today;
     private Calendar CalendarCtrl;
     private List<CalendarItem> Items;
     private string CalendarName { get; set; }

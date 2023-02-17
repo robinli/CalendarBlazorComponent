@@ -64,6 +64,8 @@ namespace RazerComponent
         internal override void TodayClick()
         {
             daysAway = 0;
+            Today = DateTime.Today;
+            TodayChanged.InvokeAsync(Today);
             CreateMonth();
         }
         //private async Task OnPreviousClick()

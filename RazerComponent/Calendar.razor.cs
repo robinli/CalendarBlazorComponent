@@ -17,7 +17,10 @@ namespace RazerComponent
         [Inject] public IJSRuntime jsRunTime { get; set; }
         [Inject] public IStringLocalizer<Calendar> Localizer { get; set; }
         [Parameter] public CalendarKind ViewKind { get; set; } = CalendarKind.Month;
+        
         [Parameter] public DateTime? Today { get; set; } = DateTime.Today;
+        [Parameter] public EventCallback<DateTime?> TodayChanged { get; set; }
+        
         [Parameter] public List<CalendarItem> CalendarItems { get; set; }
         [Parameter] public EventCallback<CalendarItem> ItemClick { get; set; }
         [Parameter] public EventCallback<DateRange> DateRangeChange { get; set; }
@@ -47,9 +50,22 @@ namespace RazerComponent
             StateHasChanged();
         }
 
-        private void PreviousClick() { CurrentViewInstance.PreviousClick(); }
-        private void NextClick() { CurrentViewInstance.NextClick(); }
-        private void TodayClick() { CurrentViewInstance.TodayClick(); }
+        private void PreviousClick()
+        {
+            CurrentViewInstance.PreviousClick();
+            TodayChanged.InvokeAsync(Today);
+        }
+        private void NextClick()
+        {
+            CurrentViewInstance.NextClick();
+            TodayChanged.InvokeAsync(Today);
+        }
+        private void TodayClick()
+        {
+            CurrentViewInstance.TodayClick();
+            TodayChanged.InvokeAsync(Today);
+        }
+
         private async Task OnViewKindChange(ChangeEventArgs e)
         {
             await Task.Delay(0);
