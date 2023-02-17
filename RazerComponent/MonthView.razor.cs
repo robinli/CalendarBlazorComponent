@@ -23,11 +23,10 @@ namespace RazerComponent
 
         private void CreateMonth(bool notifyEvent = true)
         {
-            Today = (Today.HasValue ? Today.Value : DateTime.Today);
-            var tempDate = Today.Value.AddMonths(monthsAway);
-            month = tempDate.Month;
-            year = tempDate.Year;
-
+            //Today = (Today.HasValue ? Today.Value : DateTime.Today);
+            //var tempDate = Today.Value.AddMonths(monthsAway);
+            month = Today.Value.Month;
+            year = Today.Value.Year;
             DateTime monthStart = new DateTime(year, month, 1);
             monthEnd = monthStart.AddMonths(1).AddDays(-1);
             numDummyColumn = (int)monthStart.DayOfWeek;
@@ -44,12 +43,16 @@ namespace RazerComponent
         }
         internal override void PreviousClick()
         {
-            monthsAway--; 
+            monthsAway--;
+            Today = Today.Value.AddMonths(-1);
+            TodayChanged.InvokeAsync(Today);
             CreateMonth();
         }
         internal override void NextClick()
         {
-            monthsAway++; 
+            monthsAway++;
+            Today = Today.Value.AddMonths(1);
+            TodayChanged.InvokeAsync(Today);
             CreateMonth();
         }
         internal override void TodayClick()

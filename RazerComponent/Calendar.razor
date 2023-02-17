@@ -23,11 +23,10 @@
             </span>
         </div>
     </div>
-
     @if (ViewKind == CalendarKind.Month)
     {
         <MonthView @ref="MonthViewl"
-            Today="@Today"
+           @bind-Today="@Today"
             CalendarItems="CalendarItems"
             ItemClick="@((CalendarItem data) => OnItemClick(data))"
             DateRangeChange="DateRangeChange" 
@@ -37,7 +36,7 @@
     @if (ViewKind == CalendarKind.Week)
     {
         <WeekView @ref="WeekViewl"
-            Today="@Today"
+            @bind-Today="@Today"
             CalendarItems="CalendarItems"
             ItemClick="@((CalendarItem data) => OnItemClick(data))"
             DateRangeChange="DateRangeChange"

@@ -12,6 +12,8 @@ namespace RazerComponent
     public class CalendarViewBase : ComponentBase
     {
         [Parameter] public DateTime? Today { get; set; }
+        [Parameter] public EventCallback<DateTime?> TodayChanged { get; set; }
+
         [Parameter] public List<CalendarItem> CalendarItems { get; set; }
         [Parameter] public EventCallback<CalendarItem> ItemClick { get; set; }
         [Parameter] public EventCallback<DateRange> DateRangeChange { get; set; }

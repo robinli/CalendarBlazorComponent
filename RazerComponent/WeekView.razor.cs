@@ -30,9 +30,8 @@ namespace RazerComponent
 
         private void CreateMonth(bool notifyEvent = true)
         {
-            Today = (Today.HasValue ? Today.Value : DateTime.Today);
-
-            DateTime tempDate = Today.Value.AddDays(daysAway);
+            //Today = (Today.HasValue ? Today.Value : DateTime.Today);
+            DateTime tempDate = Today.Value;//.Value.AddDays(daysAway);
             int days = (int)tempDate.DayOfWeek;
 
             WeekFrom = tempDate.AddDays((-1) * days);
@@ -51,11 +50,15 @@ namespace RazerComponent
         internal override void PreviousClick()
         {
             daysAway = daysAway - 7;
+            Today = Today.Value.AddDays(-7);
+            TodayChanged.InvokeAsync(Today);
             CreateMonth();
         }
         internal override void NextClick()
         {
             daysAway = daysAway + 7;
+            Today = Today.Value.AddDays(7);
+            TodayChanged.InvokeAsync(Today);
             CreateMonth();
         }
         internal override void TodayClick()

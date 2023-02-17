@@ -17,7 +17,7 @@ namespace RazerComponent
         [Inject] public IJSRuntime jsRunTime { get; set; }
         [Inject] public IStringLocalizer<Calendar> Localizer { get; set; }
         [Parameter] public CalendarKind ViewKind { get; set; } = CalendarKind.Month;
-        [Parameter] public DateTime? Today { get; set; }
+        [Parameter] public DateTime? Today { get; set; } = DateTime.Today;
         [Parameter] public List<CalendarItem> CalendarItems { get; set; }
         [Parameter] public EventCallback<CalendarItem> ItemClick { get; set; }
         [Parameter] public EventCallback<DateRange> DateRangeChange { get; set; }
