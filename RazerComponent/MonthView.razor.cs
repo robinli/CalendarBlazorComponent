@@ -35,12 +35,9 @@ namespace RazerComponent
             {
                 DateRangeChange.InvokeAsync(new DateRange(monthStart, monthEnd));
             }
+            base.CalendarTitleChanged.InvokeAsync(monthEnd.ToString("Y"));
         }
 
-        internal override string GetTitle() 
-        { 
-            return monthEnd.ToString("Y"); 
-        }
         internal override void PreviousClick()
         {
             monthsAway--;

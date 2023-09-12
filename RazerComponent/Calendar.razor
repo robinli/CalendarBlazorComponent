@@ -26,7 +26,8 @@
     @if (ViewKind == CalendarKind.Month)
     {
         <MonthView @ref="MonthViewl"
-           @bind-Today="@Today"
+            @bind-Today="@Today"
+            @bind-CalendarTitle="@CalendarTitle"
             CalendarItems="CalendarItems"
             ItemClick="@((CalendarItem data) => OnItemClick(data))"
             DateRangeChange="DateRangeChange" 
@@ -37,6 +38,7 @@
     {
         <WeekView @ref="WeekViewl"
             @bind-Today="@Today"
+            @bind-CalendarTitle="@CalendarTitle"
             CalendarItems="CalendarItems"
             ItemClick="@((CalendarItem data) => OnItemClick(data))"
             DateRangeChange="DateRangeChange"

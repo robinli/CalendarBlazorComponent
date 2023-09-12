@@ -16,11 +16,12 @@ namespace RazerComponent
     {
         [Inject] public IJSRuntime jsRunTime { get; set; }
         [Inject] public IStringLocalizer<Calendar> Localizer { get; set; }
+        
         [Parameter] public CalendarKind ViewKind { get; set; } = CalendarKind.Month;
         
         [Parameter] public DateTime? Today { get; set; } = DateTime.Today;
         [Parameter] public EventCallback<DateTime?> TodayChanged { get; set; }
-        
+
         [Parameter] public List<CalendarItem> CalendarItems { get; set; }
         [Parameter] public EventCallback<CalendarItem> ItemClick { get; set; }
         [Parameter] public EventCallback<DateRange> DateRangeChange { get; set; }
@@ -29,7 +30,7 @@ namespace RazerComponent
 
         private MonthView MonthViewl { get; set; }
         private WeekView WeekViewl { get; set; }
-        private string CalendarTitle { get; set; }
+        public string CalendarTitle { get; set; }
 
         private CalendarViewBase CurrentViewInstance;
         protected override void OnInitialized()
@@ -46,8 +47,6 @@ namespace RazerComponent
             {
                 CurrentViewInstance = WeekViewl;
             }
-            CalendarTitle = CurrentViewInstance.GetTitle();
-            StateHasChanged();
         }
 
         private void PreviousClick()

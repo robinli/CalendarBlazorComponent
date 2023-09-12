@@ -14,6 +14,9 @@ namespace RazerComponent
         [Parameter] public DateTime? Today { get; set; }
         [Parameter] public EventCallback<DateTime?> TodayChanged { get; set; }
 
+        [Parameter] public string CalendarTitle { get; set; }
+        [Parameter] public EventCallback<string> CalendarTitleChanged { get; set; }
+
         [Parameter] public List<CalendarItem> CalendarItems { get; set; }
         [Parameter] public EventCallback<CalendarItem> ItemClick { get; set; }
         [Parameter] public EventCallback<DateRange> DateRangeChange { get; set; }
@@ -38,8 +41,6 @@ namespace RazerComponent
         }
         #endregion
 
-
-        internal virtual string GetTitle() { return Today.Value.ToString("Y"); }
         internal virtual void PreviousClick() { return; }
         internal virtual void NextClick() { return; }
         internal virtual void TodayClick() { return; }

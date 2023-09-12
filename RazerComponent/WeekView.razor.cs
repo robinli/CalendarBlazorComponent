@@ -30,7 +30,7 @@ namespace RazerComponent
 
         private void CreateMonth(bool notifyEvent = true)
         {
-            //Today = (Today.HasValue ? Today.Value : DateTime.Today);
+            Today = (Today.HasValue ? Today.Value : DateTime.Today);
             DateTime tempDate = Today.Value;//.Value.AddDays(daysAway);
             int days = (int)tempDate.DayOfWeek;
 
@@ -41,12 +41,9 @@ namespace RazerComponent
             {
                 DateRangeChange.InvokeAsync(new DateRange(WeekFrom, WeekEnd));
             }
+            base.CalendarTitleChanged.InvokeAsync(WeekFrom.ToString("Y"));
         }
 
-        internal override string GetTitle()
-        {
-            return WeekFrom.ToString("Y");
-        }
         internal override void PreviousClick()
         {
             daysAway = daysAway - 7;
